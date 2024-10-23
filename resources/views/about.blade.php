@@ -11,6 +11,9 @@
   
   <a href="/">home</a>
   <a href="/about">about</a>
+  <a href="/blog">blog</a>
+  <a href="/contact">blog</a>
+
   <h1>about page</h1>
 <h3>owner: {{ $nama }}</h3>
   <img src="img/1.png" alt="">
