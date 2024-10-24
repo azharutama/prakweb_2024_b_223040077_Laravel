@@ -1,7 +1,11 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 Route::get('/', function () {
     return view('home',  ['title' => 'Home page']);
@@ -12,23 +16,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog page', 'posts' => [
-        [
-            'id' => 1,
-            'slug' => 'Judul-Artikel-1',
-            'title' => 'Judul Artikel 1',
-            'author' => 'Azhar Utama',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus debitis voluptatem, consectetur molestias ipsum quasi dignissimos culpa exercitationem quibusdam officiis, animi possimus similique, molestiae magni eaque. Quam commodi voluptatibus consequuntur?',
-        ],
-
-        [
-            'id' => 2,
-            'slug' => 'Judul-Artikel-2',
-            'title' => 'Judul Artikel 2',
-            'author' => 'Azhar Lutfiadi',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus debitis voluptatem, consectetur molestias ipsum quasi dignissimos culpa exercitationem quibusdam officiis, animi possimus similique, molestiae magni eaque. Quam commodi voluptatibus consequuntur?',
-        ]
-    ]]);
+    return view('posts', ['title' => 'Blog page', 'posts' => Post::all()]);
 });
 
 Route::get('/contact', function () {
@@ -36,27 +24,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/posts/{slug}', function ($slug) {
-    $posts = [
-        [
-            'id' => 1,
-            'slug' => 'Judul-Artikel-1',
-            'title' => 'Judul Artikel 1',
-            'author' => 'Azhar Utama',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus debitis voluptatem, consectetur molestias ipsum quasi dignissimos culpa exercitationem quibusdam officiis, animi possimus similique, molestiae magni eaque. Quam commodi voluptatibus consequuntur?',
-        ],
 
-        [
-            'id' => 2,
-            'slug' => 'Judul-Artikel-2',
-            'title' => 'Judul Artikel 2',
-            'author' => 'Azhar Lutfiadi',
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus debitis voluptatem, consectetur molestias ipsum quasi dignissimos culpa exercitationem quibusdam officiis, animi possimus similique, molestiae magni eaque. Quam commodi voluptatibus consequuntur?',
-        ],
-    ];
-
-    $post = Arr::first($posts, function ($post) use ($slug) {
-        return $post['slug'] == $slug;
-    });
-
+    $post = Post::find($slug);
     return view('post', ['title' => 'Single post', 'post' => $post]);
 });
