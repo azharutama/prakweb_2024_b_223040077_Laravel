@@ -23,8 +23,8 @@ Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact page']);
 });
 
-Route::get('/posts/{slug}', function ($slug) {
+Route::get('/posts/{post:slug}', function (Post $post) {
 
-    $post = Post::find($slug);
+    // $post = Post::find($slug);
     return view('post', ['title' => 'Single post', 'post' => $post]);
 });

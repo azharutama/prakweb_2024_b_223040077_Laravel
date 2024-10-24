@@ -9,7 +9,7 @@
    <a href="/posts/{{ $post['slug'] }}"> <h2 class="mb-1 text-3xl tracking-tight font-bold text-gray-900">{{ $post['title'] }}</h2>
    </a>
     <div class="text-base text-grey-500">
-      <a href="#">{{ $post['author'] }}</a> | 24 0ktober 2024
+      <a href="#">{{ $post['author'] }}</a> | {{ $post->created_at->diffForHumans()}}
     </div>
 
     <p class="my-4 font-light">{{ Str::limit($post['body'], 50) }}</p>
