@@ -13,23 +13,23 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // Category::created([
+        Category::created([
 
-        //     'name' => 'Web Design',
-        //     'slug' => 'web-Desain'
-        // ]);
+            'name' => 'Web Design',
+            'slug' => 'web-Desain'
+        ]);
 
-        // Category::created([
+        Category::created([
 
-        //     'name' => 'Intelegensia Buatan',
-        //     'slug' => 'Intelegensia-Buatan'
-        // ]);
+            'name' => 'Intelegensia Buatan',
+            'slug' => 'Intelegensia-Buatan'
+        ]);
 
-        // Category::created([
+        Category::created([
 
-        //     'name' => 'UI UX',
-        //     'slug' => 'UI-UX'
-        // ]);
-        Category::factory(3)->create();
+            'name' => 'UI UX',
+            'slug' => 'UI-UX'
+        ]);
+        // Category::factory(3)->create();
     }
 }
