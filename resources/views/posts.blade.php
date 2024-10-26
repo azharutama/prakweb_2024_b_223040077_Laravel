@@ -32,6 +32,7 @@
     </div>
 </div>
 
+{{ $posts->links() }}
  
     <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-8 px:0 ">
      
