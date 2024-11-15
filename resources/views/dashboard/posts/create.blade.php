@@ -8,7 +8,7 @@
 
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
           
-            <form action="/dashboard/posts" method="post">
+            <form action="/dashboard/posts" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
@@ -47,12 +47,20 @@
                     </div>
 
                     
-
+                    <div  class="sm:col-span-2">  
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Post Image</label>
+                        <input id="image" name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"  type="file">
+                    </div>
+                    @error('image')
+                    <div>   
+                      <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium"> {{ $message }} </p>    
+                    </div>
+                      @enderror
+                    
                     <div class="sm:col-span-2">
                         <label for="body" class="block text-sm font-medium text-gray-700">Content</label>
                         <input id="body" type="hidden" name="body" value="{{ old('body') }}">
                         <trix-editor input="body"></trix-editor>
-
                     </div>
                     @error('body')
                     <div>   

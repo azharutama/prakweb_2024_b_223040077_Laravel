@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Controller;
 
 
 
@@ -46,12 +47,19 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
             'slug' => 'required|unique:posts|max:255',
             'category_id' => 'required',
+            'image' => 'image|file|max:3024',
             'body' => 'required',
         ]);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
 
         $validatedData['author_id'] = Auth::user()->id;
