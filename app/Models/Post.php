@@ -17,7 +17,7 @@ class Post extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function category(): BelongsTo
@@ -44,6 +44,11 @@ class Post extends Model
             fn($query, $author) =>
             $query->whereHas('author', fn($query) => $query->where('username', $author))
         );
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     //
