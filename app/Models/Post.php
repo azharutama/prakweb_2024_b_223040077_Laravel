@@ -14,7 +14,7 @@ class Post extends Model
 {
 
     use HasFactory, Sluggable;
-    protected $fillable = ['title', 'author', 'slug', 'body'];
+    protected $fillable = ['title', 'slug', 'author_id', 'category_id', 'body'];
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo
@@ -24,7 +24,7 @@ class Post extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function scopeFilter(Builder $query, array $filters): void

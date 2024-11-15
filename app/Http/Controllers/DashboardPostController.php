@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 
 
 
@@ -45,7 +46,19 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $validatedData = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'slug' => 'required|unique:posts|max:255',
+            'category_id' => 'required',
+            'body' => 'required',
+        ]);
+
+
+        $validatedData['author_id'] = Auth::user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100,);
+        Post::create($validatedData);
+
+        return redirect('/dashboard/posts')->with('success', 'New post created!');
     }
 
     /**
