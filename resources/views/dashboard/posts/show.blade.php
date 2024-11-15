@@ -56,22 +56,22 @@
               <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ $post->title }}</h1>
           </header>
 
-@if ($post->image)
-<figure class="max-w-lg">
-  <img class="h-auto max-w-full rounded-lg" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->category->name }}">
-</figure>
+      @if ($post->image)
+      <figure class="max-w-lg">
+        <img class="h-auto max-w-full rounded-lg" src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->category->name }}">
+      </figure>
 
-  @else
-  <figure class="max-w-lg">
-    <img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1719937050679-c3a2c9c67b0f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" alt="{{ $post->category->name }}">
-  </figure>
-@endif
-          
+            @else
+            <figure class="max-w-lg">
+              <img class="h-auto max-w-full rounded-lg" src="https://images.unsplash.com/photo-1719937050679-c3a2c9c67b0f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8" alt="{{ $post->category->name }}">
+            </figure>
+          @endif
+                
          
 
-          <p>{{ strip_tags($post->body)}}</p>
-      </article>
-  </div>
-</main>
+              <p>{{ strip_tags($post->body)}}</p>
+          </article>
+      </div>
+    </main>
 
 @endsection

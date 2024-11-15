@@ -49,7 +49,11 @@
                     
                     <div  class="sm:col-span-2">  
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Post Image</label>
-                        <input id="image" name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"  type="file">
+                        <img  class="img-preview h-auto max-w-xs">
+                        <input id="image" name="image" 
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                                type="file"
+                                onchange="previewImage()">
                     </div>
                     @error('image')
                     <div>   
@@ -91,6 +95,22 @@
                     fileTools.style.display = 'none';
                 }
             });
+
+
+
+            function previewImage(){
+              const image= document.querySelector('#image');
+              const imgPreview = document.querySelector('.img-preview');
+
+              imgPreview.style.display = 'block';
+
+              const oFReader = new FileReader();
+              oFReader.readAsDataURL(image.files[0]);
+
+              oFReader.onload = function (OFREvent){
+                imgPreview.src = OFREvent.target.result;
+              }            }
+            
         </script>
         
 

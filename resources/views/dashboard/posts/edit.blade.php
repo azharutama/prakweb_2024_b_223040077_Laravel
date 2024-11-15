@@ -8,7 +8,7 @@
 
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
           
-            <form action="/dashboard/posts/{{ $post->slug }}" method="post">
+            <form action="/dashboard/posts/{{ $post->slug }}" method="post" enctype="multipart/form-data">
               @method('put')
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -48,6 +48,26 @@
                     </div>
 
                     
+                    <div  class="sm:col-span-2">  
+                      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Post Image</label>
+                      <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                      @if ($post->image)
+                      <img src="{{ asset('storage/'.$post->image) }}" class="img-preview h-auto max-w-xs">
+                      @else
+                      <img  class="img-preview h-auto max-w-xs">
+                      @endif
+                     
+                      <input id="image" name="image" 
+                              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                              type="file"
+                              onchange="previewImage()">
+                  </div>
+                  @error('image')
+                  <div>   
+                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium"> {{ $message }} </p>    
+                  </div>
+                    @enderror
+
 
                     <div class="sm:col-span-2">
                         <label for="body" class="block text-sm font-medium text-gray-700">Content</label>
@@ -84,7 +104,20 @@
                     fileTools.style.display = 'none';
                 }
             });
+
+            function previewImage(){
+            const image= document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function (OFREvent){
+              imgPreview.src = OFREvent.target.result;
+            }}
         </script>
-        
+
 
 @endsection
