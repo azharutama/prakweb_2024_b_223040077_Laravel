@@ -33,6 +33,8 @@ class LoginController extends Controller
         return back()->with('loginError', 'login failed!');
     }
 
+
+
     public function logout()
     {
         Auth::logout();
